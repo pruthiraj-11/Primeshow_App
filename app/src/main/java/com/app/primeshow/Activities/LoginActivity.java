@@ -3,7 +3,9 @@ package com.app.primeshow.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.app.primeshow.databinding.ActivityLoginBinding;
@@ -16,6 +18,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
 
         binding.loginbtn.setOnClickListener(v -> {
             if(binding.userName.getText().toString().isEmpty() || binding.userPassword.getText().toString().isEmpty()){

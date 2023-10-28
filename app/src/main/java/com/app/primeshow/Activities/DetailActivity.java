@@ -1,11 +1,13 @@
 package com.app.primeshow.Activities;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.view.View;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,7 +18,6 @@ import com.android.volley.toolbox.Volley;
 import com.app.primeshow.Adapters.ActorListAdapter;
 import com.app.primeshow.Adapters.GenresEachFilmListAdapter;
 import com.app.primeshow.Models.FilmItem;
-import com.app.primeshow.R;
 import com.app.primeshow.databinding.ActivityDetailBinding;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -35,15 +36,14 @@ public class DetailActivity extends AppCompatActivity {
         binding=ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//        }
+
         idFilm=getIntent().getIntExtra("id",0);
         binding.imageRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         binding.genreRecyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        binding.backbtndetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        binding.backbtndetail.setOnClickListener(v -> finish());
         sendRequest();
     }
 
